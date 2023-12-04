@@ -18,9 +18,11 @@ export class TodosComponent {
 
   add() {
     var newTodo = { title: '... ' };
-    this.service.add(newTodo)?.subscribe(
-      t => this.todos.push(t),
-      err => this.message = err);
+    this.service.add(newTodo)?.subscribe({
+      next: t => this.todos.push(t),
+      error: err => this.message = err.message
+    });
+
   }
 
   delete(id: number) {
